@@ -12,7 +12,7 @@ typedef enum Types
 	None,
 	/*1 Tokens*/
 	_SEMI,_COMMA,_ASSIGNOP,_GT,_LT,_EQ,_GE,_LE,_NE,
-	_PLUS,_MINUS,_STAR,_DIV,
+	_PLUS,_MINUS,_STAR,_DIV,_SELFPLUS,
 	_AND,_OR,_DOT,_NOT,_TYPE,
 	_LP,_RP,_LB,_RB,_LC,_RC,
 	_STRUCT,_RETURN,_IF,_ELSE,_WHILE,_FOR,_DO,

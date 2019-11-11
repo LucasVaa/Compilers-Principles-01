@@ -7,7 +7,7 @@ static const char *const types_name_table[] =
 	"None",
 	/*1 Tokens*/
 	"SEMI","COMMA","ASSIGNOP","GT","LT","EQ","GE","LE","NE",
-	"PLUS","MINUS","STAR","DIV",
+	"PLUS","MINUS","STAR","DIV","SELFPLUS",
 	"AND","OR","DOT","NOT","TYPE",
 	"LP","RP","LB","RB","LC","RC",
 	"STRUCT","RETURN","IF","ELSE","WHILE","FOR","DO"

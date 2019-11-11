@@ -35,6 +35,7 @@ illID {digit}({letter_}|{digit})*
 "<=" {yylval=create_node(_LE);yylval->line=yylineno;return LE;}
 "!=" {yylval=create_node(_NE);yylval->line=yylineno;return NE;}
 "+" {yylval=create_node(_PLUS);yylval->line=yylineno;return PLUS;}
+"++" {yylval=create_node(_SELFPLUS);yylval->line=yylineno;return SELFPLUS;}
 "-" {yylval=create_node(_MINUS);yylval->line=yylineno;return MINUS;} 
 "*" {yylval=create_node(_STAR);yylval->line=yylineno;return STAR;}
 "/" {yylval=create_node(_DIV);yylval->line=yylineno;return DIV;}
@@ -42,7 +43,7 @@ illID {digit}({letter_}|{digit})*
 "||" {yylval=create_node(_OR);yylval->line=yylineno;return OR;}
 "." {yylval=create_node(_DOT);yylval->line=yylineno;return DOT;}
 "!" {yylval=create_node(_NOT);yylval->line=yylineno;return NOT;}
-"int"|"float" {yylval=create_node(_TYPE);yylval->line=yylineno;strcpy(yylval->name,yytext);return TYPE;}
+"int"|"float"|"void" {yylval=create_node(_TYPE);yylval->line=yylineno;strcpy(yylval->name,yytext);return TYPE;}
 "(" {yylval=create_node(_LP);yylval->line=yylineno;return LP;}
 ")" {yylval=create_node(_RP);yylval->line=yylineno;return RP;}
 "[" {yylval=create_node(_LB);yylval->line=yylineno;return LB;}
