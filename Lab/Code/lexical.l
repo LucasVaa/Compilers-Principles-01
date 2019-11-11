@@ -28,7 +28,12 @@ illID {digit}({letter_}|{digit})*
 ";" {yylval=create_node(_SEMI);yylval->line=yylineno;return SEMI;}
 "," {yylval=create_node(_COMMA);yylval->line=yylineno;return COMMA;}
 "=" {yylval=create_node(_ASSIGNOP);yylval->line=yylineno;return ASSIGNOP;}
-">"|"<"|">="|"<="|"=="|"!=" {yylval=create_node(_RELOP);yylval->line=yylineno;return RELOP;}
+">" {yylval=create_node(_GT);yylval->line=yylineno;return GT;}
+"<" {yylval=create_node(_LT);yylval->line=yylineno;return LT;}
+"==" {yylval=create_node(_EQ);yylval->line=yylineno;return EQ;}
+">=" {yylval=create_node(_GE);yylval->line=yylineno;return GE;}
+"<=" {yylval=create_node(_LE);yylval->line=yylineno;return LE;}
+"!=" {yylval=create_node(_NE);yylval->line=yylineno;return NE;}
 "+" {yylval=create_node(_PLUS);yylval->line=yylineno;return PLUS;}
 "-" {yylval=create_node(_MINUS);yylval->line=yylineno;return MINUS;} 
 "*" {yylval=create_node(_STAR);yylval->line=yylineno;return STAR;}
@@ -49,6 +54,8 @@ illID {digit}({letter_}|{digit})*
 "if" {yylval=create_node(_IF);yylval->line=yylineno;return IF;}
 "else" {yylval=create_node(_ELSE);yylval->line=yylineno;return ELSE;}
 "while" {yylval=create_node(_WHILE);yylval->line=yylineno;return WHILE;}
+"for"  {yylval=create_node(_FOR);yylval->line=yylineno;return FOR;}
+"do"  {yylval=create_node(_DO);yylval->line=yylineno;return DO;}
 {int} {yylval=create_node(_INT);yylval->line=yylineno;yylval->value_i=get_value(yytext);return INT;}
 {float} {yylval=create_node(_FLOAT);yylval->line=yylineno;yylval->value_f=strtof(yytext,NULL);return FLOAT;}
 {id} {yylval=create_node(_ID);yylval->line=yylineno;strcpy(yylval->name,yytext);return ID;}

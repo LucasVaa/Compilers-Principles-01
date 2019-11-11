@@ -11,7 +11,7 @@ typedef enum Types
 	/*0 Epsilon*/
 	None,
 	/*1 Tokens*/
-	_SEMI,_COMMA,_ASSIGNOP,_RELOP,
+	_SEMI,_COMMA,_ASSIGNOP,_GT,_LT,_EQ,_GE,_LE,_NE,
 	_PLUS,_MINUS,_STAR,_DIV,
 	_AND,_OR,_DOT,_NOT,_TYPE,
 	_LP,_RP,_LB,_RB,_LC,_RC,
@@ -20,15 +20,15 @@ typedef enum Types
 	/*2 High-level Definitions*/
 	Program,ExtDefList,ExtDef,ExtDecList,
 	/*3 Specifiers*/
-	Specifier,StructSpecifier,OptTag,Tag,
+	TypeSpecifier,StructSpecifier,OptTag,Tag,
 	/*4 Declarators*/
 	VarDec,FunDec,VarList,ParamDec,
 	/*5 Statements*/
 	CompSt,StmtList,Stmt,
 	/*6 Local Definitions*/
-	DefList,Def,DecList,Dec,
+	VarDeclaration,
 	/*7 Expressions*/
-	Exp,Args
+	Expr,Args
 }Types;
 typedef struct Node
 {
@@ -37,6 +37,7 @@ typedef struct Node
 	int line;//行号
 	int value_i;//整形数值
 	float value_f;//浮点形数值
+	char* value_c;
 	struct Node* father;//父节点
 	int child_count;//字节点的数量
 	struct Node* child[MAX_COUNT_OF_CHILD]; 
