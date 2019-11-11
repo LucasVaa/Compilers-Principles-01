@@ -15,7 +15,7 @@ typedef enum Types
 	_PLUS,_MINUS,_STAR,_DIV,
 	_AND,_OR,_DOT,_NOT,_TYPE,
 	_LP,_RP,_LB,_RB,_LC,_RC,
-	_STRUCT,_RETURN,_IF,_ELSE,_WHILE,
+	_STRUCT,_RETURN,_IF,_ELSE,_WHILE,_FOR,_DO,
 	_ID,_INT,_FLOAT,
 	/*2 High-level Definitions*/
 	Program,ExtDefList,ExtDef,ExtDecList,
@@ -24,7 +24,7 @@ typedef enum Types
 	/*4 Declarators*/
 	VarDec,FunDec,VarList,ParamDec,
 	/*5 Statements*/
-	CompSt,StmtList,Stmt,
+	CompSt,StmtList,Stmt,RepeatStatement,CompoundStatement,ChooseStament,
 	/*6 Local Definitions*/
 	VarDeclaration,
 	/*7 Expressions*/

@@ -10,7 +10,7 @@ static const char *const types_name_table[] =
 	"PLUS","MINUS","STAR","DIV",
 	"AND","OR","DOT","NOT","TYPE",
 	"LP","RP","LB","RB","LC","RC",
-	"STRUCT","RETURN","IF","ELSE","WHILE",
+	"STRUCT","RETURN","IF","ELSE","WHILE","FOR","DO"
 	"ID","INT","FLOAT",
 	/*2 High-level Definitions*/
 	"Program","ExtDefList","ExtDef","ExtDecList",
@@ -19,7 +19,7 @@ static const char *const types_name_table[] =
 	/*4 Declarators*/
 	"VarDec","FunDec","VarList","ParamDec",
 	/*5 Statements*/
-	"CompSt","StmtList","Stmt",
+	"CompSt","StmtList","Stmt","RepeatStatement","CompoundStatement","ChooseStament",
 	/*6 Local Definitions*/
 	"VarDeclaration",
 	/*7 Expressions*/

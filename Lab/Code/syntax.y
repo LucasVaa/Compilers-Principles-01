@@ -93,19 +93,8 @@ Stmt : Expr SEMI {$$=create_node(Stmt);construct($$,2,$1,$2);}
 	| RETURN Expr SEMI {$$=create_node(Stmt);construct($$,3,$1,$2,$3);}
 	| RETURN error SEMI {$$=create_node(Stmt);construct($$,3,$1,create_node(None),$3);
 						m_yyerror("something wrong with expression before \";\"",@2.last_line);}
-	| IF LP Expr RP Stmt %prec LOWER_THAN_ELSE {$$=create_node(Stmt);construct($$,5,$1,$2,$3,$4,$5);}
-	| IF LP error RP Stmt %prec LOWER_THAN_ELSE{$$=create_node(Stmt);construct($$,5,$1,$2,create_node(None),$4,$5);
-												m_yyerror("something wrong with expression between ()",@3.last_line);}
-	| IF LP Expr RP Stmt ELSE Stmt {$$=create_node(Stmt);construct($$,7,$1,$2,$3,$4,$5,$6,$7);}
-	| IF LP Expr RP error ELSE Stmt {$$=create_node(Stmt);construct($$,7,$1,$2,$3,$4,create_node(None),$6,$7);
-									m_yyerror("Missing \";\"",@5.last_line);}
-	| IF LP error RP Stmt ELSE Stmt {$$=create_node(Stmt);construct($$,7,$1,$2,create_node(None),$4,$5,$6,$7);
-									m_yyerror("something wrong with expression between ()",@3.last_line);}
-	| IF error RP Stmt %prec LOWER_THAN_ELSE {$$=create_node(Stmt);construct($$,4,$1,create_node(None),$3,$4);
-												m_yyerror("missing \"(\"",@2.last_line);}
-	| IF error RP Stmt ELSE Stmt {$$=create_node(Stmt);construct($$,6,$1,create_node(None),$3,$4,$5,$6);
-									m_yyerror("missing \"(\"",@2.last_line);}
 	;
+//这里有一点点疑问，stmt不需要括号嘛
 //循环语句部分
 RepeatStatement: WHILE LP Expr RP StmtCompoundStatement {$$=create_node(RepeatStatement);construct($$,5,$1,$2,$3,$4,$5);}
 	| WHILE LP error RP CompoundStatement {$$=create_node(RepeatStatement);construct($$,5,$1,$2,create_node(None),$4,$5);
@@ -120,13 +109,26 @@ RepeatStatement: WHILE LP Expr RP StmtCompoundStatement {$$=create_node(RepeatSt
 	| FOR LP SEMI Expr SEMI RP CompoundStatement { $$=create_node(RepeatStatement);;construct($$,7,$1,$2,$3,$4,$5,$6,$7);}
 	| FOR LP Expr SEMI SEMI RP CompoundStatement { $$=create_node(RepeatStatement);;construct($$,7,$1,$2,$3,$4,$5,$6,$7);}
 	| FOR LP SEMI SEMI RP CompoundStatement { $$=create_node(RepeatStatement);;construct($$,6,$1,$2,$3,$4,$5,$6);}
+	;
 //这里还有一些问题，就是没有for循环的错误情况处理
 CompoundStatement: Stmt {$$=create_node(CompoundStatement);;construct($$,1,$1);}
 	|RepeatStament {$$=create_node(CompoundStatement);;construct($$,1,$1);}
+	;
 //这里补充的是循环里面循环体的声明
 //下面是条件选择的部分
-
-
+ChooseStament: IF LP Expr RP Stmt %prec LOWER_THAN_ELSE {$$=create_node(ChooseStament);construct($$,5,$1,$2,$3,$4,$5);}
+	| IF LP error RP Stmt %prec LOWER_THAN_ELSE{$$=create_node(ChooseStament);construct($$,5,$1,$2,create_node(None),$4,$5);
+												m_yyerror("something wrong with expression between ()",@3.last_line);}
+	| IF LP Expr RP Stmt ELSE Stmt {$$=create_node(ChooseStament);construct($$,7,$1,$2,$3,$4,$5,$6,$7);}
+	| IF LP Expr RP error ELSE Stmt {$$=create_node(ChooseStament);construct($$,7,$1,$2,$3,$4,create_node(None),$6,$7);
+									m_yyerror("Missing \";\"",@5.last_line);}
+	| IF LP error RP Stmt ELSE Stmt {$$=create_node(ChooseStament);construct($$,7,$1,$2,create_node(None),$4,$5,$6,$7);
+									m_yyerror("something wrong with expression between ()",@3.last_line);}
+	| IF error RP Stmt %prec LOWER_THAN_ELSE {$$=create_node(ChooseStament);construct($$,4,$1,create_node(None),$3,$4);
+												m_yyerror("missing \"(\"",@2.last_line);}
+	| IF error RP Stmt ELSE Stmt {$$=create_node(ChooseStament);construct($$,6,$1,create_node(None),$3,$4,$5,$6);
+									m_yyerror("missing \"(\"",@2.last_line);}
+	;
 /*6 Local Definitions*/
 VarDeclaration : TypeSpecifier Expr SEMI{$$=create_node(VarDeclaration);construct($$,2,$1,$2);}
 	| TypeSpecifier Expr COMMA Expr SEMI{$$=create_node(VarDeclaration);construct($$,3,$1,$2,$4);}
